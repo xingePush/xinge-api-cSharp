@@ -7,15 +7,12 @@ namespace XingeApp
 {
     public class Message
     {
-        public static int TYPE_NOTIFICATION = 1;
-        public static int TYPE_MESSAGE = 2;
-
         private string m_title;
         private string m_content;
         private int m_expireTime;
         private string m_sendTime;
         private List<TimeInterval> m_acceptTimes;
-        private int m_type;
+        private string m_type;
         private int m_multiPkg;
         private Style m_style;
         private ClickAction m_action;
@@ -28,7 +25,7 @@ namespace XingeApp
         {
             this.m_title = "";
             this.m_content = "";
-            this.m_sendTime = "2013-12-20 18:31:00";
+            this.m_sendTime = "";
             this.m_acceptTimes = new List<TimeInterval>();
             this.m_multiPkg = 0;
             this.m_raw = "";
@@ -76,11 +73,11 @@ namespace XingeApp
             }
             return json;
         }
-        public void setType(int type)
+        public void setType(string type)
         {
             this.m_type = type;
         }
-        public int getType()
+        public string getType()
         {
             return m_type;
         }
@@ -129,11 +126,11 @@ namespace XingeApp
         {
             if (m_raw.Length != 0)
                 return true;
-            if (m_type < TYPE_NOTIFICATION || m_type > TYPE_MESSAGE)
+            if (m_type != (XGPushConstants.OrdinaryMessage) && m_type != (XGPushConstants.SilentMessage))
                 return false;
             if (m_multiPkg < 0 || m_multiPkg > 1)
                 return false;
-            if (m_type == TYPE_NOTIFICATION)
+            if (m_type == (XGPushConstants.OrdinaryMessage))
             {
                 if (!m_style.isValid()) return false;
                 if (!m_action.isValid()) return false;
@@ -151,13 +148,13 @@ namespace XingeApp
             return true;
         }
 
-        public string toJson()
+        public object toJson()
         {
             if (m_raw.Length != 0)
                 return m_raw;
             Dictionary<string, object> dict = new Dictionary<string, object>();
             Dictionary<string, object> message = new Dictionary<string, object>();
-            if (m_type == TYPE_NOTIFICATION)
+            if (m_type.Equals(XGPushConstants.OrdinaryMessage))
             {
                 dict.Add("title", m_title);
                 dict.Add("content", m_content);
@@ -175,14 +172,22 @@ namespace XingeApp
                 dict.Add("small_icon", m_style.getSmallIcon());
                 dict.Add("action", m_action.toJson());
             }
-            else if(m_type == TYPE_MESSAGE)
+            else if(m_type.Equals(XGPushConstants.SilentMessage))
             {
                 dict.Add("title", m_title);
                 dict.Add("content", m_content);
                 dict.Add("accept_time", acceptTimeToJsonArray());
             }
-            dict.Add("custom_content", m_custom);
-            return JsonConvert.SerializeObject(dict);
+            
+            if (this.m_custom != null)
+            {
+                foreach(var kvp in m_custom)
+                {
+                    dict.Add(kvp.Key, kvp.Value);
+                }
+            }
+
+            return dict;
         }
     }
 

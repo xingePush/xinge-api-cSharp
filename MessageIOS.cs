@@ -5,15 +5,12 @@ using Newtonsoft.Json.Linq;
 
 namespace XingeApp
 {
-    public class MessageIOS
+    public class MessageiOS
     {
-        public static int TYPE_APNS_NOTIFICATION = 0;
-        //public static int TYPE_REMOTE_NOTIFICATION = 12;
-
         private int m_expireTime;
         private string m_sendTime;
         private List<TimeInterval> m_acceptTimes;
-        private int m_type;
+        private string m_type;
         private Dictionary<string, object> m_custom;
         private string m_raw;
         private string m_alertStr;
@@ -23,10 +20,12 @@ namespace XingeApp
         private string m_category;
         private int m_loopInterval;
         private int m_loopTimes;
+        private string m_title;
+        private string m_subtitle;
 
-        public MessageIOS()
+        public MessageiOS()
         {
-            this.m_sendTime = "2014-03-13 16:13:00";
+            this.m_sendTime = "";
             this.m_acceptTimes = new List<TimeInterval>();
             this.m_raw = "";
             this.m_alertStr = "";
@@ -35,15 +34,17 @@ namespace XingeApp
             this.m_category = "";
             this.m_loopInterval = -1;
             this.m_loopTimes = -1;
-            this.m_type = TYPE_APNS_NOTIFICATION;
+            this.m_type = XGPushConstants.OrdinaryMessage;
+            this.m_title = "";
+            this.m_subtitle = "";
         }
 
-        public void setType(int type)
+        public void setType(string type)
         {
             this.m_type = type;
         }
 
-        public int getType()
+        public string getType()
         {
             return m_type;
         }
@@ -109,6 +110,15 @@ namespace XingeApp
         {
             m_badge = badge;
         }
+        public void setTitle(string title) 
+        {
+            this.m_title = title;
+        }
+        
+        public void setSubTitle(string title) 
+        {
+            this.m_subtitle = title;
+        }
 
         public void setSound(string sound)
         {
@@ -146,7 +156,7 @@ namespace XingeApp
                 return true;
             if (m_expireTime < 0 || m_expireTime > 3 * 24 * 60 * 60)
                 return false;
-            if (m_type != TYPE_APNS_NOTIFICATION )
+            if ( m_type != (XGPushConstants.OrdinaryMessage) && m_type != (XGPushConstants.SilentMessage) )
                 return false;
             foreach (TimeInterval ti in m_acceptTimes)
             {
@@ -159,20 +169,21 @@ namespace XingeApp
             return true;
         }
 
-        public string toJson()
+        public object toJson()
         {
             if (m_raw.Length != 0)
                 return m_raw;
             Dictionary<string,object> dict = new Dictionary<string, object>();
             dict.Add("accept_time",acceptTimeToJsonArray());
             Dictionary<string, object> aps = new Dictionary<string, object>();
-            if(m_type == TYPE_APNS_NOTIFICATION)
+            Dictionary<string, object> iOS = new Dictionary<string, object>();
+
+            if(m_type.Equals(XGPushConstants.OrdinaryMessage))
             {
-                aps.Add("alert",m_alertStr);
-                if(m_badge != 0)
-                {
-                    aps.Add("badge",m_badge);
-                }
+                Dictionary<string, object> alert = new Dictionary<string, object>();
+                aps.Add("alert",alert);
+                aps.Add("badge",m_badge);
+                
                 if(m_sound.Length != 0)
                 {
                     aps.Add("sound",m_sound);
@@ -181,9 +192,36 @@ namespace XingeApp
                 {
                     aps.Add("category",m_category);
                 }
+                if (this.m_subtitle.Length != 0)
+                {
+                    iOS.Add("subtitle", this.m_subtitle);
+                }
+                if (this.m_title.Length != 0)
+                {
+                    dict.Add("title", this.m_title);
+                }
+                if (this.m_alertStr.Length != 0)
+                {
+                    dict.Add("content", m_alertStr);
+                }
+
+            } else if (m_type.Equals(XGPushConstants.SilentMessage)) {
+                aps.Add("content-available", 1);
             }
-            dict.Add("aps",aps);
-            return JsonConvert.SerializeObject(dict);
+
+            iOS.Add("aps",aps);
+            if (this.m_custom != null)
+            {
+                foreach(var kvp in m_custom)
+                {
+                    iOS.Add(kvp.Key, kvp.Value);
+                }
+            }
+            
+
+            dict.Add("iOS", iOS);
+            
+            return dict;
         }
     }
 
