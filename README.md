@@ -1,9 +1,11 @@
-# xinge-api-C**#**
+# xinge-api-C#
 ## 概述
-[信鸽](http://xg.qq.com) 是腾讯云提供的一款支持**百亿级**消息的移动App推送平台，开发者可以调用PHP SDK访问信鸽推送服务。
+[信鸽](http://xg.qq.com) 是腾讯云提供的一款支持**百亿级**消息的移动App推送平台，开发者可以调用C# SDK访问信鸽推送服务。
 
 ## 引用SDK
-请到[信鸽官网](http://xg.qq.com/xg/ctr_index/download)下载最新版本的包(基于.NET Framework4.0)，使用时添加XingeApp.dll依赖即可。
+方法一：请到[信鸽官网](http://xg.qq.com/xg/ctr_index/download)下载最新版本的包，使用时添加XingeApp.dll依赖即可。
+
+方法二：克隆本git仓库，此项目是使用Visual Studio Code for Mac IDE开发的，其中SDK文件夹下是封装的源码，SDK.Test文件夹下是封装的源码的UT.
 
 ## 接口说明
 信鸽提供的主要推送和查询接口包括3种
