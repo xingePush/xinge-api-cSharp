@@ -1,0 +1,9 @@
+/Users/uwei/GitHub/xinge-api-cSharp/SDK/bin/Debug/netstandard2.0/XingeApp.deps.json
+/Users/uwei/GitHub/xinge-api-cSharp/SDK/bin/Debug/netstandard2.0/XingeApp.dll
+/Users/uwei/GitHub/xinge-api-cSharp/SDK/bin/Debug/netstandard2.0/XingeApp.pdb
+/Users/uwei/GitHub/xinge-api-cSharp/SDK/obj/Debug/netstandard2.0/XingeApp.csprojAssemblyReference.cache
+/Users/uwei/GitHub/xinge-api-cSharp/SDK/obj/Debug/netstandard2.0/XingeApp.csproj.CoreCompileInputs.cache
+/Users/uwei/GitHub/xinge-api-cSharp/SDK/obj/Debug/netstandard2.0/XingeApp.AssemblyInfoInputs.cache
+/Users/uwei/GitHub/xinge-api-cSharp/SDK/obj/Debug/netstandard2.0/XingeApp.AssemblyInfo.cs
+/Users/uwei/GitHub/xinge-api-cSharp/SDK/obj/Debug/netstandard2.0/XingeApp.dll
+/Users/uwei/GitHub/xinge-api-cSharp/SDK/obj/Debug/netstandard2.0/XingeApp.pdb

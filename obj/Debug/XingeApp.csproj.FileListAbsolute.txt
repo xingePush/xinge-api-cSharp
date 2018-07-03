@@ -1,9 +1,0 @@
-C:\Project\XingeApp\XingeApp\bin\Debug\XingeApp.pdb
-C:\Project\XingeApp\XingeApp\bin\Debug\Newtonsoft.Json.dll
-C:\Project\XingeApp\XingeApp\obj\Debug\XingeApp.csprojResolveAssemblyReference.cache
-C:\Project\XingeApp\XingeApp\obj\Debug\XingeApp.csproj.CoreCompileInputs.cache
-C:\Project\XingeApp\XingeApp\obj\Debug\XingeApp.pdb
-C:\Project\XingeApp\XingeApp\bin\Debug\XingeApp.dll
-C:\Project\XingeApp\XingeApp\obj\Debug\XingeApp.dll
-C:\Project\XingeApp\XingeApp\bin\Debug\Newtonsoft.Json.pdb
-C:\Project\XingeApp\XingeApp\bin\Debug\Newtonsoft.Json.xml

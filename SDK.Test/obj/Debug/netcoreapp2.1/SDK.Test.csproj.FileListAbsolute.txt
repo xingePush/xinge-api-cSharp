@@ -1,0 +1,17 @@
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/bin/Debug/netcoreapp2.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/bin/Debug/netcoreapp2.1/xunit.runner.reporters.netcoreapp10.dll
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/bin/Debug/netcoreapp2.1/xunit.runner.utility.netcoreapp10.dll
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/bin/Debug/netcoreapp2.1/SDK.Test.deps.json
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/bin/Debug/netcoreapp2.1/SDK.Test.runtimeconfig.json
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/bin/Debug/netcoreapp2.1/SDK.Test.runtimeconfig.dev.json
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/bin/Debug/netcoreapp2.1/SDK.Test.dll
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/bin/Debug/netcoreapp2.1/SDK.Test.pdb
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/bin/Debug/netcoreapp2.1/XingeApp.dll
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/bin/Debug/netcoreapp2.1/XingeApp.pdb
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/obj/Debug/netcoreapp2.1/SDK.Test.csprojAssemblyReference.cache
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/obj/Debug/netcoreapp2.1/SDK.Test.csproj.CoreCompileInputs.cache
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/obj/Debug/netcoreapp2.1/SDK.Test.AssemblyInfoInputs.cache
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/obj/Debug/netcoreapp2.1/SDK.Test.AssemblyInfo.cs
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/obj/Debug/netcoreapp2.1/SDK.Test.csproj.CopyComplete
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/obj/Debug/netcoreapp2.1/SDK.Test.dll
+/Users/uwei/GitHub/xinge-api-cSharp/SDK.Test/obj/Debug/netcoreapp2.1/SDK.Test.pdb
