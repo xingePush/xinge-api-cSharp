@@ -753,7 +753,7 @@ namespace XingeApp
             param.Add("send_time", message.getSendTime());
             param.Add("multi_pkg", message.getMultiPkg());
             param.Add("message_type", message.getType());
-            param.Add("tags_list", toJArray(tagList));
+            param.Add("tag_list", toJArray(tagList));
             // param.Add("tags_op", tagOp);
             param.Add("message", message.toJson());
             param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
@@ -792,7 +792,7 @@ namespace XingeApp
             param.Add("expire_time", message.getExpireTime());
             param.Add("send_time", message.getSendTime());
             param.Add("message_type", message.getType());
-            param.Add("tags_list", toJArray(tagList));
+            param.Add("tag_list", toJArray(tagList));
             // param.Add("tags_op", tagOp);
             param.Add("message", message.toJson());
             param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
