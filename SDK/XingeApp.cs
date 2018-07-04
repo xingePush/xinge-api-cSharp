@@ -202,7 +202,7 @@ namespace XingeApp
             request.Method = "POST";
             request.ContentType = "application/json";
             string postData = JsonConvert.SerializeObject(param);
-            // System.Console.WriteLine(postData);
+            System.Console.WriteLine(postData);
             byte[] data = Encoding.UTF8.GetBytes(postData);
             request.ContentLength = data.Length;
 
@@ -747,13 +747,16 @@ namespace XingeApp
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("audience_type", "tag");
             param.Add("platform", "android");
-            param.Add("op", tagOp);
             // param.Add("access_id", this.xgPushAppAccessKey);
             param.Add("expire_time", message.getExpireTime());
             param.Add("send_time", message.getSendTime());
             param.Add("multi_pkg", message.getMultiPkg());
             param.Add("message_type", message.getType());
-            param.Add("tag_list", toJArray(tagList));
+            Dictionary <string, object> tagListParam = new Dictionary<string, object>();
+            tagListParam.Add("tags",toJArray(tagList));
+            tagListParam.Add("op", tagOp);
+            param.Add("tag_list", tagListParam);
+            // param.Add("tag_list", toJArray(tagList));
             // param.Add("tags_op", tagOp);
             param.Add("message", message.toJson());
             param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
@@ -787,12 +790,15 @@ namespace XingeApp
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("audience_type", "tag");
             param.Add("platform", "ios");
-            param.Add("op", tagOp);
             // param.Add("access_id", this.xgPushAppAccessKey);
             param.Add("expire_time", message.getExpireTime());
             param.Add("send_time", message.getSendTime());
             param.Add("message_type", message.getType());
-            param.Add("tag_list", toJArray(tagList));
+            Dictionary <string, object> tagListParam = new Dictionary<string, object>();
+            tagListParam.Add("tags",toJArray(tagList));
+            tagListParam.Add("op", tagOp);
+            param.Add("tag_list", tagListParam);
+            // param.Add("tag_list", tagList);
             // param.Add("tags_op", tagOp);
             param.Add("message", message.toJson());
             param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);

@@ -5,7 +5,6 @@ namespace SDK.Test
 {
     public class UnitTest1
     {
-        
         [Fact]
         public void TestPushTokenOfiOS()
         {
@@ -48,18 +47,20 @@ namespace SDK.Test
             string result = null;
             Random random = new Random();
             int messageIndex = random.Next(9999);
-            result = XingeApp.XingeApp.pushTagiOS("5412567459229", 2200262432, "24f595178abda55aa74dc2ce4033d600", "CSharpSDK " + messageIndex,"your test tag", XingeApp.XingeApp.PushEnvironmentofiOS.develop);
+            result = XingeApp.XingeApp.pushTagiOS("5412567459229", 2200262432, "24f595178abda55aa74dc2ce4033d600", "CSharpSDK " + messageIndex,"your_test_tag", XingeApp.XingeApp.PushEnvironmentofiOS.develop);
             Console.WriteLine(result);
         }
+        
         [Fact]
         public void TestPushTagOfAndroid()
         {
             string result = null;
             Random random = new Random();
             int messageIndex = random.Next(9999);
-            result = XingeApp.XingeApp.pushTagAndroid("d617a675b62d0",2100271539, "9e05364c6d56da943783e61da091e8e5","Android","CSharpSDK " + messageIndex, "your test tag");
+            result = XingeApp.XingeApp.pushTagAndroid("d617a675b62d0",2100271539, "9e05364c6d56da943783e61da091e8e5","Android","CSharpSDK " + messageIndex, "your_test_tag");
             Console.WriteLine(result);
         }
+        
         [Fact]
         public void TestPushAllOfiOS()
         {
