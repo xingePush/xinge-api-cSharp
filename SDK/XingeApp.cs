@@ -111,10 +111,10 @@ namespace XingeApp
         protected Dictionary<string, object> initParams()
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
-            DateTime Epoch = new DateTime(1970, 1, 1);
-            long timestamp = (long)(DateTime.UtcNow - Epoch).TotalMilliseconds;
+            // DateTime Epoch = new DateTime(1970, 1, 1);
+            // long timestamp = (long)(DateTime.UtcNow - Epoch).TotalMilliseconds;
             param.Add("access_id", this.xgPushAppAccessKey);
-            param.Add("timestamp", timestamp);
+            param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
             return param;
         }
 
@@ -167,6 +167,7 @@ namespace XingeApp
             {
                 temp += kvp.Key + "=" + HttpUtility.UrlEncode(kvp.Value.ToString()) + "&";
             }
+
             try
             {
                 temp = url + "?" + temp.Remove(temp.Length - 1, 1);
@@ -494,7 +495,6 @@ namespace XingeApp
                 param.Add("loop_times", message.getLoopTimes());
             }
             System.Console.WriteLine(param);
-            // string ret = callRestful(XingeApp.RESTAPI_PUSHSINGLEDEVICE, param);
             string ret = requestXGServerV3(XingeApp.XGPushServierHost, XingeApp.XGPushAppPath, param);
             return ret;
         }
@@ -532,7 +532,6 @@ namespace XingeApp
                 param.Add("loop_interval", message.getLoopInterval());
                 param.Add("loop_times", message.getLoopTimes());
             }
-            // string ret = callRestful(XingeApp.RESTAPI_PUSHSINGLEDEVICE, param);
             string ret = requestXGServerV3(XingeApp.XGPushServierHost, XingeApp.XGPushAppPath, param);
             return ret;
         }
@@ -564,7 +563,6 @@ namespace XingeApp
             param.Add("message_type", message.getType());
             param.Add("message", message.toJson());
             param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
-            // string ret = callRestful(XingeApp.RESTAPI_PUSHSINGLEACCOUNT, param);
             string ret = requestXGServerV3(XingeApp.XGPushServierHost, XingeApp.XGPushAppPath, param);
             return ret;
         }
@@ -601,14 +599,13 @@ namespace XingeApp
             param.Add("message", message.toJson());
             param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
             param.Add("environment", environment);
-            // string ret = callRestful(XingeApp.RESTAPI_PUSHSINGLEACCOUNT, param);
             string ret = requestXGServerV3(XingeApp.XGPushServierHost, XingeApp.XGPushAppPath, param);
             return ret;
         }
 
         /// <summery> 推送消息给绑定账号的设备, 限 Android 系统使用
         /// <param name = "accountList"> 接收设备标识绑定的账号列表 </param>
-        /// <param name = "message"> Android 消息结构体 </param>
+        /// <param name = "message"> Android 消息结构体,注意：第一次推送时，message中的pushID是填写0，若需要再次推送同样的文本，需要根据返回的push_id填写 </param>
         /// <returns> 推送结果描述 </returns>
         /// </summery>
         public string PushAccountList(List<string> accountList, Message message)
@@ -627,15 +624,15 @@ namespace XingeApp
             param.Add("account_list", toJArray(accountList));
             param.Add("message_type", message.getType());
             param.Add("message", message.toJson());
+            param.Add("push_id", message.getPushID().ToString());
             param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
-            // string ret = callRestful(XingeApp.RESTAPI_PUSHACCOUNTLIST, param);
             string ret = requestXGServerV3(XingeApp.XGPushServierHost, XingeApp.XGPushAppPath, param);
             return ret;
         }
 
         /// <summery> 推送消息给绑定账号的设备, 限 iOS 系统使用
         /// <param name = "accountList"> 接收设备标识绑定的账号列表 </param>
-        /// <param name = "message"> iOS 消息结构体 </param>
+        /// <param name = "message"> iOS 消息结构体，注意：第一次推送时，message中的pushID是填写0，若需要再次推送同样的文本，需要根据返回的push_id填写 </param>
         /// <param name = "environment"> 指定推送环境 </param>
         /// <returns> 推送结果描述 </returns>
         /// </summery>
@@ -658,9 +655,9 @@ namespace XingeApp
             param.Add("account_list", toJArray(accountList));
             param.Add("message_type", message.getType());
             param.Add("message", message.toJson());
+            param.Add("push_id", message.getPushID().ToString());
             param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
             param.Add("environment", environment);
-            // string ret = callRestful(XingeApp.RESTAPI_PUSHACCOUNTLIST, param);
             string ret = requestXGServerV3(XingeApp.XGPushServierHost, XingeApp.XGPushAppPath, param);
             return ret;
         }
@@ -690,7 +687,6 @@ namespace XingeApp
                 param.Add("loop_interval", message.getLoopInterval());
                 param.Add("loop_times", message.getLoopTimes());
             }
-            // string ret = callRestful(XingeApp.RESTAPI_PUSHALLDEVICE, param);
             string ret = requestXGServerV3(XingeApp.XGPushServierHost, XingeApp.XGPushAppPath, param);
             return ret;
         }
@@ -725,7 +721,6 @@ namespace XingeApp
                 param.Add("loop_interval", message.getLoopInterval());
                 param.Add("loop_times", message.getLoopTimes());
             }
-            // string ret = callRestful(XingeApp.RESTAPI_PUSHALLDEVICE, param);
             string ret = requestXGServerV3(XingeApp.XGPushServierHost, XingeApp.XGPushAppPath, param);
             return ret;
         }
@@ -765,7 +760,6 @@ namespace XingeApp
                 param.Add("loop_interval", message.getLoopInterval());
                 param.Add("loop_times", message.getLoopTimes());
             }
-            // string ret = callRestful(XingeApp.RESTAPI_PUSHTAGS, param);
             string ret = requestXGServerV3(XingeApp.XGPushServierHost, XingeApp.XGPushAppPath, param);
             return ret;
         }
@@ -808,76 +802,7 @@ namespace XingeApp
                 param.Add("loop_interval", message.getLoopInterval());
                 param.Add("loop_times", message.getLoopTimes());
             }
-            // string ret = callRestful(XingeApp.RESTAPI_PUSHTAGS, param);
             string ret = requestXGServerV3(XingeApp.XGPushServierHost, XingeApp.XGPushAppPath, param);
-            return ret;
-        }
-
-        //创建批量推送消息，后续利用生成的pushid配合PushAccountListMultiple或PushDeviceListMultiple接口使用，限android
-        public string CreateMultipush(Message message)
-        {
-            if (!isValidMessageType(message))
-                return "message type error!";
-            if (!message.isValid())
-                return "message is invalid!";
-            Dictionary<string, object> param = new Dictionary<string, object>();
-            param.Add("access_id", this.xgPushAppAccessKey);
-            param.Add("expire_time", message.getExpireTime());
-            param.Add("multi_pkg", message.getMultiPkg());
-            param.Add("message_type", message.getType());
-            param.Add("message", message.toJson());
-            param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
-            string ret = callRestful(XingeApp.RESTAPI_CREATEMULTIPUSH, param);
-            return ret;
-        }
-
-        //创建批量推送消息，后续利用生成的pushid配合PushAccountListMultiple或PushDeviceListMultiple接口使用，限iOS
-        public string CreateMultipush(MessageiOS message, PushEnvironmentofiOS environment)
-        {
-            if (!isValidMessageType(message, environment))
-            {
-                return "{'ret_code':-1,'err_msg':'message type or environment error!'}";
-            }
-            if (!message.isValid())
-            {
-                return "{'ret_code':-1,'err_msg':'message invalid!'}";
-            }
-            Dictionary<string, object> param = new Dictionary<string, object>();
-            param.Add("access_id", this.xgPushAppAccessKey);
-            param.Add("expire_time", message.getExpireTime());
-            param.Add("message_type", message.getType());
-            param.Add("message", message.toJson());
-            param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
-            param.Add("environment", environment);
-            string ret = callRestful(XingeApp.RESTAPI_CREATEMULTIPUSH, param);
-            return ret;
-        }
-
-        //推送消息给大批量账号
-        public string PushAccountListMultiple(long pushId, List<string> accountList)
-        {
-            if (pushId <= 0)
-                return "{'ret_code':-1,'err_msg':'pushId invalid!'}";
-            Dictionary<string, object> param = new Dictionary<string, object>();
-            param.Add("access_id", this.xgPushAppAccessKey);
-            param.Add("push_id", pushId);
-            param.Add("account_list", toJArray(accountList));
-            param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
-            string ret = callRestful(XingeApp.RESTAPI_PUSHACCOUNTLISTMULTIPLE, param);
-            return ret;
-        }
-
-        //推送消息给大批量设备
-        public string PushDeviceListMultiple(long pushId, List<string> deviceList)
-        {
-            if (pushId <= 0)
-                return "{'ret_code':-1,'err_msg':'pushId invalid!'}";
-            Dictionary<string, object> param = new Dictionary<string, object>();
-            param.Add("access_id", this.xgPushAppAccessKey);
-            param.Add("push_id", pushId);
-            param.Add("device_list", toJArray(deviceList));
-            param.Add("timestamp", (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
-            string ret = callRestful(XingeApp.RESTAPI_PUSHDEVICELISTMULTIPLE, param);
             return ret;
         }
 
@@ -993,15 +918,16 @@ namespace XingeApp
                 }
             }
             Dictionary<string, object> param = this.initParams();
-            List<string> tag_token_pair = new List<string>();
+            List<List<string>> tag_token_pair = new List<List<string>>();
             foreach (TagTokenPair pair in tagTokenPairs)
             {
                 List<string> singleTagToken = new List<string>();
                 singleTagToken.Add(pair.tag);
-                singleTagToken.Add(pair.token);
-                tag_token_pair.Add(singleTagToken.ToString());
+                singleTagToken.Add(pair.token);;
+                tag_token_pair.Add(singleTagToken);
             }
-            param.Add("tag_token_list", toJArray(tag_token_pair));
+            var json = JsonConvert.SerializeObject(tag_token_pair);
+            param.Add("tag_token_list", json);
             string ret = callRestful(XingeApp.RESTAPI_BATCHSETTAG, param);
             return ret;
         }
@@ -1017,15 +943,16 @@ namespace XingeApp
                 }
             }
             Dictionary<string, object> param = this.initParams();
-            List<string> tag_token_pair = new List<string>();
+            List<List<string>> tag_token_pair = new List<List<string>>();
             foreach (TagTokenPair pair in tagTokenPairs)
             {
                 List<string> singleTagToken = new List<string>();
                 singleTagToken.Add(pair.tag);
                 singleTagToken.Add(pair.token);
-                tag_token_pair.Add(singleTagToken.ToString());
+                tag_token_pair.Add(singleTagToken);
             }
-            param.Add("tag_token_list", toJArray(tag_token_pair));
+            var json = JsonConvert.SerializeObject(tag_token_pair);
+            param.Add("tag_token_list", json);
             string ret = callRestful(XingeApp.RESTAPI_BATCHDELTAG, param);
             return ret;
         }

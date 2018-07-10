@@ -16,9 +16,9 @@
 - pushAccountList 推送消息给多个账号
 - pushAllDevice 推送消息给单个app的所有设备
 - pushTags 推送消息给tags指定的设备
-- createMultipush创建大批量推送消息
-- pushAccountListMultiple推送消息给大批量账号(可多次)
-- pushDeviceListMultiple推送消息给大批量设备(可多次)
+- createMultipush创建大批量推送消息(C# SDK 1.2.0+ 不在支持)
+- pushAccountListMultiple推送消息给大批量账号(可多次)(C# SDK 1.2.0+ 不在支持)
+- pushDeviceListMultiple推送消息给大批量设备(可多次)(C# SDK 1.2.0+ 不在支持)
 
 ### 异步查询推送状态
 - queryPushStatus查询群发消息发送状态

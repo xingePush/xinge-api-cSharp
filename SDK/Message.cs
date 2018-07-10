@@ -20,6 +20,7 @@ namespace XingeApp
         private string m_raw;
         private int m_loopInterval;
         private int m_loopTimes;
+        private int m_pushID;
 
         public Message()
         {
@@ -33,6 +34,7 @@ namespace XingeApp
             this.m_loopTimes = -1;
             this.m_action = new ClickAction();
             this.m_style = new Style(0);
+            this.m_pushID = 0;
         }
 
         public void setTitle(String title)
@@ -122,15 +124,24 @@ namespace XingeApp
             m_loopTimes = loopTimes;
         }
 
+        public void setPushID(int pushid)
+        {
+            m_pushID = pushid;
+        }
+        public int getPushID()
+        {
+            return m_pushID;
+        }
+
         public Boolean isValid()
         {
             if (m_raw.Length != 0)
                 return true;
-            if (m_type != (XGPushConstants.OrdinaryMessage) && m_type != (XGPushConstants.SilentMessage))
+            if (m_type != (XGPushConstants.OrdinaryMessage) && m_type != (XGPushConstants.SilentMessage) && m_type != "1" && m_type != "2")
                 return false;
             if (m_multiPkg < 0 || m_multiPkg > 1)
                 return false;
-            if (m_type == (XGPushConstants.OrdinaryMessage))
+            if (m_type == (XGPushConstants.OrdinaryMessage) || m_type != "1")
             {
                 if (!m_style.isValid()) return false;
                 if (!m_action.isValid()) return false;

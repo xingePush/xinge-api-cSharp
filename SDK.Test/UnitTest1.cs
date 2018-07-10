@@ -1,11 +1,12 @@
 using System;
 using Xunit;
+using System.Collections.Generic;
 using XingeApp;
 namespace SDK.Test
 {
     public class UnitTest1
     {
-        [Fact]
+         [Fact]
         public void TestPushTokenOfiOS()
         {
             string result = null;
@@ -79,5 +80,6 @@ namespace SDK.Test
             result = XingeApp.XingeApp.pushAllAndroid("d617a675b62d0",2100271539, "9e05364c6d56da943783e61da091e8e5","Android","CSharpSDK"+ messageIndex);
             Console.WriteLine(result);
         }
+
     }
 }

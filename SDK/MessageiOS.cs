@@ -23,6 +23,8 @@ namespace XingeApp
         private string m_title;
         private string m_subtitle;
 
+        private int m_pushID;
+
         public MessageiOS()
         {
             this.m_sendTime = "";
@@ -37,6 +39,7 @@ namespace XingeApp
             this.m_type = XGPushConstants.OrdinaryMessage;
             this.m_title = "";
             this.m_subtitle = "";
+            this.m_pushID = 0;
         }
 
         public void setType(string type)
@@ -150,13 +153,23 @@ namespace XingeApp
             m_loopTimes = loopTimes;
         }
 
+        public void setPushID(int pushid)
+        {
+            m_pushID = pushid;
+        }
+        public int getPushID()
+        {
+            return m_pushID;
+        }
+
+
         public Boolean isValid()
         {
             if (m_raw.Length != 0)
                 return true;
             if (m_expireTime < 0 || m_expireTime > 3 * 24 * 60 * 60)
                 return false;
-            if ( m_type != (XGPushConstants.OrdinaryMessage) && m_type != (XGPushConstants.SilentMessage) )
+            if ( m_type != (XGPushConstants.OrdinaryMessage) && m_type != (XGPushConstants.SilentMessage) && m_type != "0")
                 return false;
             foreach (TimeInterval ti in m_acceptTimes)
             {
@@ -178,7 +191,7 @@ namespace XingeApp
             Dictionary<string, object> aps = new Dictionary<string, object>();
             Dictionary<string, object> iOS = new Dictionary<string, object>();
 
-            if(m_type.Equals(XGPushConstants.OrdinaryMessage))
+            if(m_type.Equals(XGPushConstants.OrdinaryMessage) || m_type == "0")
             {
                 Dictionary<string, object> alert = new Dictionary<string, object>();
                 aps.Add("alert",alert);
