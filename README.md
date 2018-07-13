@@ -25,13 +25,9 @@
 - cancelTimingPush取消尚未推送的定时消息
 
 ### 查询/更改账户和标签
-- queryDeviceCount查询应用覆盖的设备数
 - queryTags 查询应用的tags
 - BatchSetTag 批量为token设置标签
 - BatchDelTag 批量为token删除标签
 - queryTokenTags 查询token的tags
 - queryTagTokenNum 查询tag下token的数目
-- queryInfoOfToken 查询token的相关信息
-- queryTokensOfAccount 查询account绑定的token
 - deleteTokenOfAccount 删除account绑定的token
-- deleteAllTokensOfAccount 删除account绑定的所有token

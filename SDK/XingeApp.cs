@@ -825,7 +825,7 @@ namespace XingeApp
         }
 
         //查询消息覆盖的设备数
-        public string QueryDeviceCount()
+        private string QueryDeviceCount()
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("access_id", this.xgPushAppAccessKey);
@@ -962,7 +962,7 @@ namespace XingeApp
         *
         * @param deviceToken 目标设备token
         */
-        public string queryInfoOfToken(string deviceToken)
+        private string queryInfoOfToken(string deviceToken)
         {
             Dictionary < string, object > param = new Dictionary<string, object>();
             param.Add("access_id", this.xgPushAppAccessKey);
@@ -978,7 +978,7 @@ namespace XingeApp
         *
         * @param account 目标账号
         */
-        public string queryTokensOfAccount(string account)
+        private string queryTokensOfAccount(string account)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("access_id", this.xgPushAppAccessKey);
@@ -1012,7 +1012,7 @@ namespace XingeApp
          *
          * @param account 目标账号
          */
-        public string deleteAllTokensOfAccount(String account)
+        private string deleteAllTokensOfAccount(String account)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("access_id", this.xgPushAppAccessKey);
