@@ -24,6 +24,11 @@ namespace XingeApp
         private string m_subtitle;
 
         private int m_pushID;
+        
+        /// -1，表示角标不变；
+        /// -2，表示角标自动加+；
+        /// n，(n >= 0)表示自定义角标数值
+        private int m_badgeType;
 
         public MessageiOS()
         {
@@ -40,6 +45,7 @@ namespace XingeApp
             this.m_title = "";
             this.m_subtitle = "";
             this.m_pushID = 0;
+            this.m_badgeType = -1;
         }
 
         public void setType(string type)
@@ -109,10 +115,12 @@ namespace XingeApp
             m_alertJo = alert;
         }
 
+        [Obsolete("方法已经停用，请使用setBadgeType")]
         public void setBadge(int badge)
         {
             m_badge = badge;
         }
+        
         public void setTitle(string title) 
         {
             this.m_title = title;
@@ -162,6 +170,31 @@ namespace XingeApp
             return m_pushID;
         }
 
+        /// <summery> 设置角标下发的逻辑
+        /// <list type="int">
+        /// <item>
+        /// <term>-1</term>
+        /// <description>表示角标不变;</description>
+        /// </item>
+        /// <item>
+        /// <term>-2</term>
+        /// <description>表示角标自动加1;</description>
+        /// </item>
+        /// <item>
+        /// <term>n</term>
+        /// <description>(n>=0)表示自定义下发角标数字.</description>
+        /// </item>
+        /// </list>
+        /// </summery>
+        public void setBadgeType(int type) 
+        {
+            m_badgeType = type;
+        }
+
+        public int badgeType() 
+        {
+            return m_badgeType;
+        }
 
         public Boolean isValid()
         {
@@ -195,8 +228,8 @@ namespace XingeApp
             {
                 Dictionary<string, object> alert = new Dictionary<string, object>();
                 aps.Add("alert",alert);
-                aps.Add("badge",m_badge);
-                
+                // aps.Add("badge",m_badge);
+                aps.Add("badge_type", m_badgeType);
                 if(m_sound.Length != 0)
                 {
                     aps.Add("sound",m_sound);
