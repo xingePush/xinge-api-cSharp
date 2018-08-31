@@ -265,7 +265,7 @@ namespace XingeApp
             }
             
 
-            dict.Add("iOS", iOS);
+            dict.Add("ios", iOS);
             
             return dict;
         }

@@ -165,38 +165,41 @@ namespace XingeApp
                 return m_raw;
             Dictionary<string, object> dict = new Dictionary<string, object>();
             Dictionary<string, object> message = new Dictionary<string, object>();
+            
+            dict.Add("title", m_title);
+            dict.Add("content", m_content);
+            dict.Add("accept_time", acceptTimeToJsonArray());
+                
             if (m_type.Equals(XGPushConstants.OrdinaryMessage))
             {
-                dict.Add("title", m_title);
-                dict.Add("content", m_content);
-                dict.Add("accept_time", acceptTimeToJsonArray());
-                dict.Add("builder_id", m_style.getBuilderId());
-                dict.Add("ring", m_style.getRing());
-                dict.Add("vibrate", m_style.getVibrate());
-                dict.Add("clearable", m_style.getClearable());
-                dict.Add("n_id", m_style.getNId());
-                dict.Add("ring_raw", m_style.getRingRaw());
-                dict.Add("lights", m_style.getLights());
-                dict.Add("icon_type", m_style.getIconType());
-                dict.Add("icon_res", m_style.getIconRes());
-                dict.Add("style_id", m_style.getStyleId());
-                dict.Add("small_icon", m_style.getSmallIcon());
-                dict.Add("action", m_action.toJson());
+                
+                message.Add("builder_id", m_style.getBuilderId());
+                message.Add("ring", m_style.getRing());
+                message.Add("vibrate", m_style.getVibrate());
+                message.Add("clearable", m_style.getClearable());
+                message.Add("n_id", m_style.getNId());
+                message.Add("ring_raw", m_style.getRingRaw());
+                message.Add("lights", m_style.getLights());
+                message.Add("icon_type", m_style.getIconType());
+                message.Add("icon_res", m_style.getIconRes());
+                message.Add("style_id", m_style.getStyleId());
+                message.Add("small_icon", m_style.getSmallIcon());
+                message.Add("action", m_action.toJson());
             }
             else if(m_type.Equals(XGPushConstants.SilentMessage))
             {
-                dict.Add("title", m_title);
-                dict.Add("content", m_content);
-                dict.Add("accept_time", acceptTimeToJsonArray());
+                //
             }
             
             if (this.m_custom != null)
             {
                 foreach(var kvp in m_custom)
                 {
-                    dict.Add(kvp.Key, kvp.Value);
+                    message.Add(kvp.Key, kvp.Value);
                 }
             }
+
+            dict.Add("android", message);
 
             return dict;
         }
