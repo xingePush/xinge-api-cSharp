@@ -264,7 +264,7 @@ namespace XingeApp
         {
             MessageiOS message = new MessageiOS();
             message.setAlert(content);
-
+            message.setTitle(title);
             XingeApp xinge = new XingeApp(appID, accessID, secretKey);
             string ret = xinge.PushSingleDevice(token, message, environment);
             return (ret);
@@ -305,7 +305,7 @@ namespace XingeApp
         {
             MessageiOS message = new MessageiOS();
             message.setAlert(content);
-
+            message.setTitle(title);
             XingeApp xinge = new XingeApp(appID, accessID, secretKey);
             string ret = xinge.PushSingleAccount(account, message, environment);
             return (ret);
@@ -343,7 +343,7 @@ namespace XingeApp
         {
             MessageiOS message = new MessageiOS();
             message.setAlert(content);
-
+            message.setTitle(title);
             XingeApp xinge = new XingeApp(appID, accessID, secretKey);
             string ret = xinge.PushAllDevice(message, environment);
             return (ret);
@@ -386,7 +386,7 @@ namespace XingeApp
         {
             MessageiOS message = new MessageiOS();
             message.setAlert(content);
-
+            message.setTitle(title);
             XingeApp xinge = new XingeApp(appID, accessID, secretKey);
             List<string> tagList = new List<string>();
             tagList.Add(tag);
